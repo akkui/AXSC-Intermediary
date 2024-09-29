@@ -1,5 +1,5 @@
 const Express = require('express');
-const WebSocket = require('ws');
+const WebSocket = require('wss');
 const crypto = require('crypto');
 
 const APP = Express();
