@@ -1,6 +1,18 @@
 const Express = require('express');
-const WebSocket = require('wss');
+const WebSocket = require('ws');
 const crypto = require('crypto');
+
+const fetch = require('node-fetch');
+const appPackage = require('./package.json');
+
+(async() => {
+  const response = await fetch("https://raw.githubusercontent.com/AxonDevelopmentLab/AppsDetails/main/axsc.json");
+  const data = await response.json();
+  const version = data['server-version'];
+  if (version !== appPackage.version) setInterval(() => {
+      console.log('\n[!] You are running an outdated AXSC-Intermediary version.\nUpdate to the most recent version on "https://github.com/akkui/AXSC-Intermediary/".\n')
+  }, 1000);
+})()
 
 const APP = Express();
 APP.use((req, res, next) => {
